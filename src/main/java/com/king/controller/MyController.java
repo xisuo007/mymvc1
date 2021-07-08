@@ -6,7 +6,11 @@ import com.king.controller.validation.Create;
 import com.king.controller.validation.MyValid;
 import com.king.controller.validation.Update;
 import com.king.controller.validation.Valid;
+import com.king.entity.test.TaskInfo;
+import com.king.service.TestService001;
 import com.king.util.domain.ResultDTO;
+import com.king.util.validation.ValidationResultDTO;
+import com.king.util.validation.ValidationUtils;
 import org.springframework.util.Assert;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,6 +39,8 @@ public class MyController extends RestCtrlExceptionHandler {
 
     @Resource
     Map<String, IResourceMap> map;
+    @Resource
+    TestService001 testService;
 
 
     @RequestMapping("/null")
@@ -142,6 +148,16 @@ public class MyController extends RestCtrlExceptionHandler {
 
     }
 
+    @RequestMapping(value = "testValidationUtils",method = {RequestMethod.GET,RequestMethod.POST})
+    public void testValidationUtils(@RequestBody ValueTest update){
+        System.out.println("进入testValidationUtils方法");
+        ValidationResultDTO ret = ValidationUtils.validateEntity(update);
+        final boolean hasErrors = ret.isHasErrors();
+        System.out.println(hasErrors);
+        final String errMsg = ret.getErrMsg();
+        System.out.println(errMsg);
+    }
+
     @RequestMapping(value = "testRequest",method = {RequestMethod.GET,RequestMethod.POST})
     public void testRequest(HttpServletRequest request){
         try(final BufferedReader reader = new BufferedReader(new InputStreamReader(request.getInputStream()))) {
@@ -163,5 +179,10 @@ public class MyController extends RestCtrlExceptionHandler {
             System.out.println(entry.getKey());
             System.out.println(entry.getValue().get(str));
         }
+    }
+
+    @RequestMapping(value = "getTaskList",method = {RequestMethod.GET,RequestMethod.POST})
+    public ResultDTO<List<TaskInfo>> getTaskList(){
+        return testService.getList();
     }
 }

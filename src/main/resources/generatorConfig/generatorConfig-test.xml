@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+
+		<plugin type="cn.kingcar.mybatis.generator.plugins.namespace.NamespacePojoPlugin"/>
+		<plugin type="cn.kingcar.mybatis.generator.plugins.mapper.MapperXmlExtPlugin"/>
+		<plugin type="cn.kingcar.mybatis.generator.plugins.searchbyentity.SearchByEntityCountXmlPlugin"/>
+		<plugin type="cn.kingcar.mybatis.generator.plugins.searchbyentity.SearchByEntityXmlPlugin"/>
+		<plugin type="cn.kingcar.mybatis.generator.plugins.xml.OverwriteXmlExtPlugin"/>
+		<plugin type="cn.kingcar.mybatis.generator.plugins.lombok.LombokPlugin"/>
+		<commentGenerator type="cn.kingcar.mybatis.generator.internal.KcCommentGenerator">
+			<property name="suppressDate" value="true" />
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/test" userId="root"
+			password="root">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<javaModelGenerator targetPackage="com.king.entity.test"
+			targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="com.king.mapping.test"
+			targetProject="src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+
+		<table tableName="task_info" domainObjectName="TaskInfo"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false">
+			<generatedKey column="id" sqlStatement="Mysql" type="post" identity="true" />
+		</table>
+	</context>
+</generatorConfiguration>

@@ -1,12 +1,12 @@
-package com.king.cron;
+package com.king.hutoolHttp;
 
 import cn.hutool.cron.CronUtil;
 import cn.hutool.cron.task.Task;
 
 /**
- * Created by ljq on 2019/3/25 14:30
+ * hutool中定时任务
  */
-public class Test02 {
+public class CronTest {
     public void run(){
         System.out.println("test02 run ===========");
     }

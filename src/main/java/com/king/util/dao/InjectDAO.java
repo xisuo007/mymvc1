@@ -9,4 +9,9 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface InjectDAO {
+    /**
+     * 多数据源时的 sqlSessionFactoryName
+     * @return
+     */
+    String sqlSessionFactoryName() default "";
 }
